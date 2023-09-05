@@ -8,8 +8,6 @@ window.onload = async () => {
         try {
 
             newHeader.innerHTML = 'Kitten Pic';
-            document.body.appendChild(newHeader)
-
             const res = await fetch ('https://api.thecatapi.com/v1/images/search');
 
             const data = await res.json()
@@ -17,12 +15,9 @@ window.onload = async () => {
             const url = data[0].url;
             console.log(url)
 
-
             newPic.src = url;
             newPic.alt = "Kitten Pic";
-            document.body.appendChild(newPic);
 
-            document.body.appendChild(newImgButton)
         } catch (error) {
             console.error(`Error retriving Cat Picture`, error)
         }
@@ -33,4 +28,7 @@ window.onload = async () => {
     newImgButton.textContent = "Click me for a new cat!"
     newImgButton.addEventListener('click', fetchNewCatImg)
 
+    document.body.appendChild(newHeader);
+    document.body.appendChild(newPic);
+    document.body.appendChild(newImgButton);
 }
