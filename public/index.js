@@ -1,23 +1,36 @@
 // Your code here
 window.onload = async () => {
-    try {
-        const newHeader = document.createElement('h1')
-        newHeader.innerHTML = 'Kitten Pic';
-        document.body.appendChild(newHeader)
+    const newHeader = document.createElement('h1')
+    const newPic = document.createElement('img');
+    const newImgButton = document.createElement('button')
 
-        const res = await fetch ('https://api.thecatapi.com/v1/images/search');
+    const fetchNewCatImg = async () => {
+        try {
 
-        const data = await res.json()
-        console.log(data)
-        const url = data[0].url;
-        console.log(url)
+            newHeader.innerHTML = 'Kitten Pic';
+            document.body.appendChild(newHeader)
 
-        const newPic = document.createElement('img');
-        newPic.src = url;
-        newPic.alt = "Kitten Pic";
-        document.body.appendChild(newPic);
+            const res = await fetch ('https://api.thecatapi.com/v1/images/search');
 
-    } catch (error) {
-        console.error(`Error retriving Cat Picture`, error)
+            const data = await res.json()
+            console.log(data)
+            const url = data[0].url;
+            console.log(url)
+
+
+            newPic.src = url;
+            newPic.alt = "Kitten Pic";
+            document.body.appendChild(newPic);
+
+            document.body.appendChild(newImgButton)
+        } catch (error) {
+            console.error(`Error retriving Cat Picture`, error)
+        }
     }
+
+    fetchNewCatImg();
+
+    newImgButton.textContent = "Click me for a new cat!"
+    newImgButton.addEventListener('click', fetchNewCatImg)
+
 }
