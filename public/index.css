@@ -8,3 +8,16 @@ body {
 img {
     margin: 10px
 }
+
+button {
+    margin: 5px;
+}
+
+ul {
+    border: 1px black solid;
+    padding: 10px 100px 10px 20px
+}
+
+li {
+    margin: 10px;
+}
