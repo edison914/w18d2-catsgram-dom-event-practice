@@ -11,13 +11,13 @@ window.onload = () => {
 
 
     const commentInput = document.createElement('input');
-    commentInput.placeholder = 'Enter something';
+    commentInput.placeholder = 'Enter your comment';
     const commentSubmit = document.createElement('button');
     commentSubmit.textContent = 'Submit comment'
     const commentUl= document.createElement('ul')
 
 
-    let popScore;
+    let popScore = 0;
 
     const fetchNewCatImg = async () => {
         try {
