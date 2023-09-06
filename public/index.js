@@ -67,7 +67,7 @@ window.onload = () => {
 
     fetchNewCatImg();
 
-    newImgButton.textContent = "Click me for a new cat!"
+    newImgButton.textContent = "Click for a new cat!"
     newImgButton.addEventListener('click', fetchNewCatImg)
 
     upvoteButton.textContent = "Upvote"
