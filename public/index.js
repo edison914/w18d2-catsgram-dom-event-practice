@@ -1,5 +1,5 @@
 // Your code here
-window.onload = async () => {
+window.onload = () => {
     const newHeader = document.createElement('h1')
     newHeader.innerHTML = 'Kitten Pic';
     const newPic = document.createElement('img');
@@ -41,7 +41,7 @@ window.onload = async () => {
 
     const upVote = () => {
         popScore++;
-        console.log(popScore)
+        //console.log(popScore)
         updateScore()
     }
 
