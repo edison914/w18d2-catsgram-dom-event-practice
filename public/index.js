@@ -9,7 +9,6 @@ window.onload = () => {
     const popScoreText = document.createElement('div');
     const divforVote = document.createElement('div');
 
-
     const commentInput = document.createElement('input');
     commentInput.placeholder = 'Enter your comment';
     const commentSubmit = document.createElement('button');
@@ -23,7 +22,6 @@ window.onload = () => {
             parent.removeChild(parent.firstChild)
         }
     }
-
 
     const fetchNewCatImg = async () => {
         try {
@@ -43,17 +41,13 @@ window.onload = () => {
             updateScore();
             commentInput.value = '';
             localStorage.removeItem(`currentComment`);
-            console.log(`localstorage remove called`)
+
             removeChildElement(commentUl)
-            console.log(`removeChildElement called`)
 
         } catch (error) {
             console.error(`Error retriving Cat Picture`, error)
         }
     }
-
-
-
 
     const upVote = () => {
         popScore++;
@@ -132,5 +126,4 @@ window.onload = () => {
             commentUl.appendChild(commentLi);
         })
     }
-
 }
