@@ -16,8 +16,14 @@ window.onload = () => {
     commentSubmit.textContent = 'Submit comment'
     const commentUl= document.createElement('ul')
 
+    let popScore, comments = [], currentImg;
 
-    let popScore = 0;
+    const removeChildElement = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild)
+        }
+    }
+
 
     const fetchNewCatImg = async () => {
         try {
@@ -26,18 +32,28 @@ window.onload = () => {
             const data = await res.json()
             //console.log(data)
             const url = data[0].url;
-            console.log(url)
+            //console.log(url)
 
             newPic.src = url;
             newPic.alt = "Kitten Pic";
 
+            localStorage.setItem('currentImg', url)
+
             popScore = 0;
             updateScore();
-            commentInput.value = ''
+            commentInput.value = '';
+            localStorage.removeItem(`currentComment`);
+            console.log(`localstorage remove called`)
+            removeChildElement(commentUl)
+            console.log(`removeChildElement called`)
+
         } catch (error) {
             console.error(`Error retriving Cat Picture`, error)
         }
     }
+
+
+
 
     const upVote = () => {
         popScore++;
@@ -52,6 +68,7 @@ window.onload = () => {
 
     const updateScore = () => {
         popScoreText.innerHTML = `Popularity Score: ${popScore}`
+        localStorage.setItem('currentScore', popScore);
     }
 
     const addedComment = () => {
@@ -61,11 +78,12 @@ window.onload = () => {
             commentLi.textContent = text;
             commentUl.appendChild(commentLi);
             commentInput.value = ''
+
+            comments.push(text);
+            localStorage.setItem('currentComment', JSON.stringify(comments))
         }
 
     }
-
-    fetchNewCatImg();
 
     newImgButton.textContent = "Click for a new cat!"
     newImgButton.addEventListener('click', fetchNewCatImg)
@@ -89,5 +107,30 @@ window.onload = () => {
     document.body.appendChild(commentInput);
     document.body.appendChild(commentSubmit);
     document.body.appendChild(commentUl);
+
+
+    if(localStorage.getItem(`currentImg`)) {
+        currentImg = localStorage.getItem(`currentImg`);
+        newPic.src = currentImg;
+    } else {
+        fetchNewCatImg();
+    }
+
+    if(localStorage.getItem(`currentScore`)) {
+        popScore = localStorage.getItem(`currentScore`)
+        updateScore();
+    } else {
+        popScore = 0;
+    }
+
+    if(localStorage.getItem(`currentComment`)) {
+        comments = JSON.parse(localStorage.getItem(`currentComment`));
+
+        comments.forEach(text => {
+            const commentLi = document.createElement('li');
+            commentLi.textContent = text;
+            commentUl.appendChild(commentLi);
+        })
+    }
 
 }
